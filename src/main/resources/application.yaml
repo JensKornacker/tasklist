@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: tasklist
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/db.changelog-master.yaml
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    url: jdbc:postgresql://localhost:5456/tasklist
+    password: tasklist
+    username: tasklist
+server:
+  port: 1111

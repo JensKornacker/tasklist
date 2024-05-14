@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: customer
+      author: jens
+      changes:
+        - createTable:
+            tableName: TASKS
+            columns:
+              - column:
+                    name: id
+                    type: uuid
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+              - column:
+                  name: updated_at
+                  type: timestamp
+              - column:
+                  name: TITLE
+                  type: varchar(128)
+              - column:
+                  name: DESCRIPTION
+                  type: varchar(255)
+              - column:
+                  name: MODULE_ID
+                  type: varchar(128)
+              - column:
+                  name: URL
+                  type: varchar(128)
