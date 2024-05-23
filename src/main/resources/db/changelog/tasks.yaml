@@ -30,3 +30,18 @@ databaseChangeLog:
               - column:
                   name: URL
                   type: varchar(128)
+              - column:
+                  name: task_id
+                  type: varchar(128)
+              - column:
+                  name: completed_at
+                  type: timestamp
+              - column:
+                  name: complete_endpoint
+                  type: varchar(128)
+              - column:
+                  name: aggregate_id
+                  type: varchar(128)
+              - column:
+                  name: additional_info
+                  type: varchar(10485760)

@@ -1,12 +1,15 @@
 package at.phactum.tasklist.rest;
 
-import at.phactum.tasklist.domain.Task;
+import java.util.List;
+
 import at.phactum.tasklist.exception.InvalidDataException;
 import at.phactum.tasklist.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +22,31 @@ public class TaskController {
 
     private final TaskService taskService;
 
+    @GetMapping
+    public ResponseEntity<List<WorkflowUserTaskDto>> listOfTasks() {
+        final List<WorkflowUserTaskDto> dtoList = taskService.listOfTasks();
+        return ResponseEntity.ok()
+                             .header("Access-Control-Allow-Origin", "http://localhost:4200")
+                             .body(dtoList);
+    }
+
     @PostMapping
-    public ResponseEntity<Void> saveTask(@RequestBody TaskDto taskDto) {
-        taskService.saveTask(taskDto);
+    public ResponseEntity<Void> saveTask(@RequestBody WorkflowUserTaskDto workflowUserTaskDto) {
+        taskService.saveTask(workflowUserTaskDto);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("complete")
+    public ResponseEntity<Void> completeTask(@RequestBody CompleteTaskEvent completeTaskEvent) {
+        taskService.competeTask(completeTaskEvent);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("{taskId}")
+    public ResponseEntity<TasklistUserTaskDto> getTask(@PathVariable("taskId") String taskId) {
+        return ResponseEntity.ok()
+                             .header("Access-Control-Allow-Origin", "http://localhost:4200")
+                             .body(taskService.getTask(taskId));
     }
 
     @ExceptionHandler(InvalidDataException.class)
@@ -30,5 +54,7 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
                              .build();
     }
+
+
 
 }

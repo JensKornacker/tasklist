@@ -10,7 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "TASKS")
@@ -42,5 +41,17 @@ public class Task {
 
     @Column(name = "task_id")
     private String taskId;
+
+    @Column(name = "additional_info")
+    private String additionalInfo;
+
+    @Column(name = "completed_at")
+    private LocalDateTime completedAt;
+
+    @Column(name = "complete_endpoint")
+    private String completeEndpoint;
+
+    @Column(name = "aggregate_id")
+    private String aggregateId;
 
 }
