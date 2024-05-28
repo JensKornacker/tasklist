@@ -18,7 +18,7 @@ public interface TaskMapper {
     HashMapConverter hashmapConverter = new HashMapConverter();
 
     WorkflowUserTaskDto map(Task task);
-    List<WorkflowUserTaskDto> map(List<Task> taskList);
+    List<TasklistUserTaskDto> map(List<Task> taskList);
 
     Task map(WorkflowUserTaskDto workflowUserTaskDto);
 

@@ -54,4 +54,6 @@ public class Task {
     @Column(name = "aggregate_id")
     private String aggregateId;
 
+    @Column(name = "assignee")
+    private String assignee;
 }

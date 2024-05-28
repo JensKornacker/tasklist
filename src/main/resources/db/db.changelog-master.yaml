@@ -1,3 +1,5 @@
 databaseChangeLog:
   - include:
       file: /db/changelog/tasks.yaml
+  - include:
+      file: /db/changelog/add-assignee.yaml

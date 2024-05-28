@@ -7,6 +7,7 @@ import at.phactum.tasklist.domain.Task;
 import at.phactum.tasklist.exception.InvalidDataException;
 import at.phactum.tasklist.mapper.TaskMapper;
 import at.phactum.tasklist.persistence.TaskRepo;
+import at.phactum.tasklist.rest.AddAssignee;
 import at.phactum.tasklist.rest.CompleteTaskEvent;
 import at.phactum.tasklist.rest.TasklistUserTaskDto;
 import at.phactum.tasklist.rest.WorkflowUserTaskDto;
@@ -32,7 +33,7 @@ public class TaskService {
         }
     }
 
-    public List<WorkflowUserTaskDto> listOfTasks() {
+    public List<TasklistUserTaskDto> listOfTasks() {
         return taskMapper.map(taskRepo.findAllByCompletedAtIsNull());
     }
 
@@ -40,10 +41,16 @@ public class TaskService {
         return taskMapper.mapToTaskList(taskRepo.findByTaskId(taskId));
     }
 
-    public void competeTask(CompleteTaskEvent completeTaskEvent) {
+    public void completeTask(CompleteTaskEvent completeTaskEvent) {
         final Task task = taskRepo.findByTaskId(completeTaskEvent.getTaskId());
         task.setCompletedAt(LocalDateTime.now());
         taskRepo.save(task);
+    }
+
+    public TasklistUserTaskDto addAssignee(AddAssignee addAssignee) {
+        final Task task = taskRepo.findByTaskId(addAssignee.taskId());
+        task.setAssignee(addAssignee.username());
+        return taskMapper.mapToTaskList(taskRepo.save(task));
     }
 
 }

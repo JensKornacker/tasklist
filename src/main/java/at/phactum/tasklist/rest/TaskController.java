@@ -7,6 +7,7 @@ import at.phactum.tasklist.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,8 +24,8 @@ public class TaskController {
     private final TaskService taskService;
 
     @GetMapping
-    public ResponseEntity<List<WorkflowUserTaskDto>> listOfTasks() {
-        final List<WorkflowUserTaskDto> dtoList = taskService.listOfTasks();
+    public ResponseEntity<List<TasklistUserTaskDto>> listOfTasks() {
+        final List<TasklistUserTaskDto> dtoList = taskService.listOfTasks();
         return ResponseEntity.ok()
                              .header("Access-Control-Allow-Origin", "http://localhost:4200")
                              .body(dtoList);
@@ -38,7 +39,7 @@ public class TaskController {
 
     @PostMapping("complete")
     public ResponseEntity<Void> completeTask(@RequestBody CompleteTaskEvent completeTaskEvent) {
-        taskService.competeTask(completeTaskEvent);
+        taskService.completeTask(completeTaskEvent);
         return ResponseEntity.ok().build();
     }
 
@@ -47,6 +48,12 @@ public class TaskController {
         return ResponseEntity.ok()
                              .header("Access-Control-Allow-Origin", "http://localhost:4200")
                              .body(taskService.getTask(taskId));
+    }
+
+    @PostMapping("add-assignee")
+    @CrossOrigin("http://localhost:4200")
+    public ResponseEntity<TasklistUserTaskDto> addAssignee(@RequestBody AddAssignee addAssignee) {
+        return ResponseEntity.ok().body(taskService.addAssignee(addAssignee));
     }
 
     @ExceptionHandler(InvalidDataException.class)
