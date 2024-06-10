@@ -56,4 +56,13 @@ public class Task {
 
     @Column(name = "assignee")
     private String assignee;
+
+    @Column(name = "status")
+    private String status;
+
+    @Column(name = "config")
+    private String config;
+
+    @Column(name = "config_data")
+    private String configData;
 }

@@ -8,5 +8,6 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CompleteTaskEvent {
     String taskId;
+    String status;
 
 }

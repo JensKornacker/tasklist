@@ -24,10 +24,10 @@ public class TaskController {
     private final TaskService taskService;
 
     @GetMapping
+    @CrossOrigin("http://localhost:4200")
     public ResponseEntity<List<TasklistUserTaskDto>> listOfTasks() {
         final List<TasklistUserTaskDto> dtoList = taskService.listOfTasks();
         return ResponseEntity.ok()
-                             .header("Access-Control-Allow-Origin", "http://localhost:4200")
                              .body(dtoList);
     }
 
@@ -61,7 +61,5 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
                              .build();
     }
-
-
 
 }

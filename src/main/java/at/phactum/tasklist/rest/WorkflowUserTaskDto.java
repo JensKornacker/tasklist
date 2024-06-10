@@ -12,4 +12,7 @@ public class WorkflowUserTaskDto {
     private String completeEndpoint;
     private String additionalInfo;
     private String aggregateId;
+    private String status;
+    private String config;
+    private String configData;
 }

@@ -44,6 +44,7 @@ public class TaskService {
     public void completeTask(CompleteTaskEvent completeTaskEvent) {
         final Task task = taskRepo.findByTaskId(completeTaskEvent.getTaskId());
         task.setCompletedAt(LocalDateTime.now());
+        task.setStatus(completeTaskEvent.getStatus());
         taskRepo.save(task);
     }
 

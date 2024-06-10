@@ -2,6 +2,7 @@ package at.phactum.tasklist.rest;
 
 import java.time.LocalDate;
 import java.util.Map;
+import java.util.SortedMap;
 
 import lombok.AccessLevel;
 import lombok.Data;
@@ -16,8 +17,11 @@ public class TasklistUserTaskDto {
     String moduleId;
     String url;
     String completeEndpoint;
-    Map<String, Object> additionalInfo;
+    SortedMap<String, SortedMap<String, String>> additionalInfo;
     String aggregateId;
     String assignee;
     LocalDate createdAt;
+    String status;
+    Map<String, Object> config;
+    Map<String, Object> configData;
 }

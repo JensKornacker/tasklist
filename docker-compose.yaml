@@ -17,5 +17,26 @@ services:
     volumes:
       - postgres3:/var/lib/postgresql/data
       - ./init/insurance-init.sql:/docker-entrypoint-initdb.d/insurance-init.sql
+
+  insurance_db: # https://hub.docker.com/_/postgres
+    container_name: insurance_db
+    image: postgres:14.5-alpine
+    ports:
+      - "5455:5432"
+    environment:
+      POSTGRES_DB: insurance
+      POSTGRES_USER: insurance
+      POSTGRES_PASSWORD: insurance
+    restart: on-failure
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgres2:/var/lib/postgresql/data
+      - ./init/insurance-init.sql:/docker-entrypoint-initdb.d/insurance-init.sql
+
 volumes:
+  postgres2:
   postgres3:
