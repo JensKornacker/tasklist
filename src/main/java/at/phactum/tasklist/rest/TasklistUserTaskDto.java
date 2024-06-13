@@ -24,4 +24,5 @@ public class TasklistUserTaskDto {
     String status;
     Map<String, Object> config;
     Map<String, Object> configData;
+    String taskDefinition;
 }

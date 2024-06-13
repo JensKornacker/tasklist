@@ -65,4 +65,7 @@ public class Task {
 
     @Column(name = "config_data")
     private String configData;
+
+    @Column(name = "task_definition")
+    private String taskDefinition;
 }
