@@ -25,10 +25,9 @@ public class TaskController {
 
     @GetMapping
     @CrossOrigin("http://localhost:4200")
-    public ResponseEntity<List<TasklistUserTaskDto>> listOfTasks() {
-        final List<TasklistUserTaskDto> dtoList = taskService.listOfTasks();
+    public ResponseEntity<List<TasklistDto>> listOfTasks() {
         return ResponseEntity.ok()
-                             .body(dtoList);
+                             .body(taskService.listOfTasks());
     }
 
     @PostMapping
@@ -44,7 +43,7 @@ public class TaskController {
     }
 
     @GetMapping("{taskId}")
-    public ResponseEntity<TasklistUserTaskDto> getTask(@PathVariable("taskId") String taskId) {
+    public ResponseEntity<TaskDto> getTask(@PathVariable("taskId") String taskId) {
         return ResponseEntity.ok()
                              .header("Access-Control-Allow-Origin", "http://localhost:4200")
                              .body(taskService.getTask(taskId));
@@ -52,7 +51,7 @@ public class TaskController {
 
     @PostMapping("add-assignee")
     @CrossOrigin("http://localhost:4200")
-    public ResponseEntity<TasklistUserTaskDto> addAssignee(@RequestBody AddAssignee addAssignee) {
+    public ResponseEntity<TaskDto> addAssignee(@RequestBody AddAssignee addAssignee) {
         return ResponseEntity.ok().body(taskService.addAssignee(addAssignee));
     }
 

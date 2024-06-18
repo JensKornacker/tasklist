@@ -9,7 +9,8 @@ import at.phactum.tasklist.mapper.TaskMapper;
 import at.phactum.tasklist.persistence.TaskRepo;
 import at.phactum.tasklist.rest.AddAssignee;
 import at.phactum.tasklist.rest.CompleteTaskEvent;
-import at.phactum.tasklist.rest.TasklistUserTaskDto;
+import at.phactum.tasklist.rest.TaskDto;
+import at.phactum.tasklist.rest.TasklistDto;
 import at.phactum.tasklist.rest.WorkflowUserTaskDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,12 +34,12 @@ public class TaskService {
         }
     }
 
-    public List<TasklistUserTaskDto> listOfTasks() {
-        return taskMapper.map(taskRepo.findAllByCompletedAtIsNull());
+    public List<TasklistDto> listOfTasks() {
+        return taskMapper.mapForList(taskRepo.findAllByCompletedAtIsNull());
     }
 
-    public TasklistUserTaskDto getTask(String taskId) {
-        return taskMapper.mapToTaskList(taskRepo.findByTaskId(taskId));
+    public TaskDto getTask(String taskId) {
+        return taskMapper.mapToTaskDto(taskRepo.findByTaskId(taskId));
     }
 
     public void completeTask(CompleteTaskEvent completeTaskEvent) {
@@ -48,10 +49,10 @@ public class TaskService {
         taskRepo.save(task);
     }
 
-    public TasklistUserTaskDto addAssignee(AddAssignee addAssignee) {
+    public TaskDto addAssignee(AddAssignee addAssignee) {
         final Task task = taskRepo.findByTaskId(addAssignee.taskId());
         task.setAssignee(addAssignee.username());
-        return taskMapper.mapToTaskList(taskRepo.save(task));
+        return taskMapper.mapToTaskDto(taskRepo.save(task));
     }
 
 }

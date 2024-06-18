@@ -10,7 +10,7 @@ import lombok.experimental.FieldDefaults;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class TasklistUserTaskDto {
+public class TaskDto {
     String taskId;
     String title;
     String description;
