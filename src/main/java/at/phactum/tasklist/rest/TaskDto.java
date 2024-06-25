@@ -25,4 +25,5 @@ public class TaskDto {
     Map<String, Object> config;
     Map<String, Object> configData;
     String taskDefinition;
+    String type;
 }

@@ -16,4 +16,5 @@ public class WorkflowUserTaskDto {
     private String config;
     private String configData;
     private String taskDefinition;
+    private String type;
 }

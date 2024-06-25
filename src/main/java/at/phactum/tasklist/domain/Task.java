@@ -68,4 +68,7 @@ public class Task {
 
     @Column(name = "task_definition")
     private String taskDefinition;
+
+    @Column(name = "type")
+    private String type;
 }

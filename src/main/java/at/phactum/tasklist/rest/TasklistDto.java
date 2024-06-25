@@ -19,4 +19,5 @@ public class TasklistDto {
     LocalDate createdAt;
     String status;
     String taskDefinition;
+    String type;
 }
