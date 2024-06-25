@@ -51,7 +51,7 @@ public class TaskController {
 
     @PostMapping("add-assignee")
     @CrossOrigin("http://localhost:4200")
-    public ResponseEntity<TaskDto> addAssignee(@RequestBody AddAssignee addAssignee) {
+    public ResponseEntity<AddAssignee> addAssignee(@RequestBody AddAssignee addAssignee) {
         return ResponseEntity.ok().body(taskService.addAssignee(addAssignee));
     }
 

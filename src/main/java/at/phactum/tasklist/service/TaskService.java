@@ -35,7 +35,7 @@ public class TaskService {
     }
 
     public List<TasklistDto> listOfTasks() {
-        return taskMapper.mapForList(taskRepo.findAllByCompletedAtIsNull());
+        return taskMapper.mapForList(taskRepo.findAllByCompletedAtIsNullOrderByCreatedAtDesc());
     }
 
     public TaskDto getTask(String taskId) {
@@ -49,10 +49,11 @@ public class TaskService {
         taskRepo.save(task);
     }
 
-    public TaskDto addAssignee(AddAssignee addAssignee) {
+    public AddAssignee addAssignee(AddAssignee addAssignee) {
         final Task task = taskRepo.findByTaskId(addAssignee.taskId());
         task.setAssignee(addAssignee.username());
-        return taskMapper.mapToTaskDto(taskRepo.save(task));
+        final TaskDto taskDto = taskMapper.mapToTaskDto(taskRepo.save(task));
+        return new AddAssignee(taskDto.getAssignee(), taskDto.getTaskId());
     }
 
 }

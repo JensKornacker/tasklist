@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TaskRepo extends JpaRepository<Task, UUID> {
     Task findByTaskId(String taskId);
-    List<Task> findAllByCompletedAtIsNull();
+    List<Task> findAllByCompletedAtIsNullOrderByCreatedAtDesc();
 }
